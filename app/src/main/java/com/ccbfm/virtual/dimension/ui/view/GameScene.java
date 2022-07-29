@@ -31,7 +31,7 @@ public class GameScene extends BaseScene {
         int hp_3 = mHeightPixels / 3;
         int hp_6 = hp_3 >> 1;
 
-        Container container = new Container(context);
+        Container<?> container = new Container<>(context);
         container.setLifecycle(getLifecycle());
 
         EnvironmentContainer environment = new EnvironmentContainer(context, wp, hp_6);

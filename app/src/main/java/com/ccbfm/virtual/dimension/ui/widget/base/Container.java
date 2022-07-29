@@ -1,7 +1,9 @@
 package com.ccbfm.virtual.dimension.ui.widget.base;
 
 import android.content.Context;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -9,10 +11,17 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.OnLifecycleEvent;
 
-public class Container extends FrameLayout implements LifecycleObserver {
+import com.ccbfm.virtual.dimension.utils.LogUtils;
+import com.ccbfm.virtual.dimension.utils.livedata.LiveDataBus;
+
+public class Container<T> extends FrameLayout implements LifecycleObserver {
     private static final String TAG = "Container";
+    private static final boolean DEBUG = true;
+    protected final Handler mMainHandler;
     protected int mWidthPixels, mHeightPixels;
     protected Lifecycle mLifecycle;
 
@@ -24,10 +33,32 @@ public class Container extends FrameLayout implements LifecycleObserver {
         super(context);
         this.mWidthPixels = widthPixels;
         this.mHeightPixels = heightPixels;
+        mMainHandler = new Handler(Looper.getMainLooper());
+
         initContainer(context);
+
+        if (context instanceof LifecycleOwner) {
+            initLifecycleOwner((LifecycleOwner) context);
+        }
+    }
+
+    protected void initLifecycleOwner(LifecycleOwner lifecycleOwner) {
+        String liveDataKey = liveDataKey();
+        LogUtils.d(TAG, "initLifecycleOwner--liveDataKey=" + liveDataKey
+                + ",lifecycleOwner=" + lifecycleOwner, DEBUG);
+        if (!TextUtils.isEmpty(liveDataKey) && lifecycleOwner != null) {
+            LiveDataBus.get().<T>with(liveDataKey)
+                    .observe(lifecycleOwner, new Observer<T>() {
+                        @Override
+                        public void onChanged(T data) {
+                            liveDataResult(data);
+                        }
+                    });
+        }
     }
 
     protected void initContainer(Context context) {
+        LogUtils.d(TAG, "initContainer--=" + this, DEBUG);
 
     }
 
@@ -36,6 +67,10 @@ public class Container extends FrameLayout implements LifecycleObserver {
             lifecycle.addObserver(this);
         }
         this.mLifecycle = lifecycle;
+    }
+
+    protected void liveDataResult(T data) {
+        LogUtils.d(TAG, "liveDataResult--=" + data + "--" + this, DEBUG);
     }
 
 
@@ -55,6 +90,10 @@ public class Container extends FrameLayout implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     protected void onStop() {
 
+    }
+
+    protected String liveDataKey() {
+        return null;
     }
 
     public static class LayoutParams extends FrameLayout.LayoutParams {
