@@ -62,7 +62,7 @@ android {
 
     productFlavors {
 
-        vd_apk {
+        vdApk {
 
         }
 

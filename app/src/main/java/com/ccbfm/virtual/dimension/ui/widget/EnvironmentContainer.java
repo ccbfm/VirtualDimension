@@ -19,6 +19,12 @@ public class EnvironmentContainer extends Container<Environment> {
     }
 
     @Override
+    protected void initContainer(Context context) {
+        super.initContainer(context);
+        setBorder();
+    }
+
+    @Override
     protected void liveDataResult(Environment data) {
         super.liveDataResult(data);
     }

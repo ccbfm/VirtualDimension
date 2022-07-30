@@ -1,6 +1,8 @@
 package com.ccbfm.virtual.dimension.ui.widget.base;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -15,10 +17,11 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.ccbfm.virtual.dimension.ui.ColorConfig;
 import com.ccbfm.virtual.dimension.utils.LogUtils;
 import com.ccbfm.virtual.dimension.utils.livedata.LiveDataBus;
 
-public class Container<T> extends FrameLayout implements LifecycleObserver {
+public class Container<T> extends FrameLayout implements LifecycleObserver, View.OnClickListener {
     private static final String TAG = "Container";
     private static final boolean DEBUG = true;
     protected final Handler mMainHandler;
@@ -58,7 +61,7 @@ public class Container<T> extends FrameLayout implements LifecycleObserver {
     }
 
     protected void initContainer(Context context) {
-        LogUtils.d(TAG, "initContainer--=" + this, DEBUG);
+        LogUtils.d(TAG, "initContainer--=" + getSimpleName(), DEBUG);
 
     }
 
@@ -69,10 +72,34 @@ public class Container<T> extends FrameLayout implements LifecycleObserver {
         this.mLifecycle = lifecycle;
     }
 
-    protected void liveDataResult(T data) {
-        LogUtils.d(TAG, "liveDataResult--=" + data + "--" + this, DEBUG);
+    protected void setBorder() {
+        setBorder(ColorConfig.CString.C000000, ColorConfig.CString.CFFFFFF);
     }
 
+    protected void setBorder(String borderColorString, String backgroundColorString) {
+        GradientDrawable drawable = new GradientDrawable();
+
+        if (!TextUtils.isEmpty(borderColorString)) {
+            // 设置圆角弧度
+            drawable.setCornerRadius(1);
+            // 设置边框线的粗细，颜色
+            drawable.setStroke(1, Color.parseColor(borderColorString));
+            setPadding(1, 1, 1, 1);
+        }
+        if (!TextUtils.isEmpty(backgroundColorString)) {
+            drawable.setColor(Color.parseColor(backgroundColorString));
+        }
+        setBackground(drawable);
+    }
+
+    protected void liveDataResult(T data) {
+        LogUtils.d(TAG, "liveDataResult--=" + data + "--" + getSimpleName(), DEBUG);
+    }
+
+    @Override
+    public void onClick(View v) {
+        LogUtils.d(TAG, "onClick--=" + v + "--" + getSimpleName(), DEBUG);
+    }
 
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
@@ -94,6 +121,10 @@ public class Container<T> extends FrameLayout implements LifecycleObserver {
 
     protected String liveDataKey() {
         return null;
+    }
+
+    protected String getSimpleName() {
+        return this.getClass().getSimpleName();
     }
 
     public static class LayoutParams extends FrameLayout.LayoutParams {

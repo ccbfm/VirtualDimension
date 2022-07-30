@@ -19,6 +19,12 @@ public class MovingBodyContainer extends Container<MovingBody> {
     }
 
     @Override
+    protected void initContainer(Context context) {
+        super.initContainer(context);
+        setBorder();
+    }
+
+    @Override
     protected void liveDataResult(MovingBody data) {
         super.liveDataResult(data);
     }

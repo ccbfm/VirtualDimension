@@ -21,6 +21,7 @@ public class DirectionContainer extends Container<Direction> {
     @Override
     protected void initContainer(Context context) {
         super.initContainer(context);
+        setBorder();
     }
 
     @Override
