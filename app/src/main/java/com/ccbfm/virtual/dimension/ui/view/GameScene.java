@@ -1,7 +1,6 @@
 package com.ccbfm.virtual.dimension.ui.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 

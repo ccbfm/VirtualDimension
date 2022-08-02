@@ -48,7 +48,7 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
     protected void initLifecycleOwner(LifecycleOwner lifecycleOwner) {
         String liveDataKey = liveDataKey();
         LogUtils.d(TAG, "initLifecycleOwner--liveDataKey=" + liveDataKey
-                + ",lifecycleOwner=" + lifecycleOwner, DEBUG);
+                + ",lifecycleOwner=" + lifecycleOwner, false);
         if (!TextUtils.isEmpty(liveDataKey) && lifecycleOwner != null) {
             LiveDataBus.get().<T>with(liveDataKey)
                     .observe(lifecycleOwner, new Observer<T>() {

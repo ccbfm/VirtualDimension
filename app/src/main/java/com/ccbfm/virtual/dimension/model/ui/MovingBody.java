@@ -1,4 +1,7 @@
 package com.ccbfm.virtual.dimension.model.ui;
 
-public class MovingBody {
+import com.ccbfm.virtual.dimension.model.OperateModel;
+
+public class MovingBody extends OperateModel {
+
 }

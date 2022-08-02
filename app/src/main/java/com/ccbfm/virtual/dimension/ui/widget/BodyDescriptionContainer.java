@@ -3,6 +3,7 @@ package com.ccbfm.virtual.dimension.ui.widget;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -16,6 +17,7 @@ public class BodyDescriptionContainer extends Container<BodyDescription> {
     private static final String TAG = "FixedBodyContainer";
     private static final boolean DEBUG = true;
     private Text mTitle, mDescription;
+    private Scroll mScroll;
 
     public BodyDescriptionContainer(@NonNull Context context) {
         super(context);
@@ -39,13 +41,14 @@ public class BodyDescriptionContainer extends Container<BodyDescription> {
         mTitle = title;
 
         Text description = new Text(context);
-        LayoutParams infoLp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        Scroll.LayoutParams infoLp = new Scroll.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         scroll.addView(description, infoLp);
         mDescription = description;
 
         LayoutParams scLp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         scLp.topMargin = tHp;
         addView(scroll, scLp);
+        mScroll = scroll;
     }
 
     @Override
@@ -54,6 +57,7 @@ public class BodyDescriptionContainer extends Container<BodyDescription> {
         if(data != null){
             mTitle.setText(data.getName());
             mDescription.setText(data.getDescription());
+            mScroll.fullScroll(View.FOCUS_UP);
         } else {
             mTitle.setText("");
             mDescription.setText("");

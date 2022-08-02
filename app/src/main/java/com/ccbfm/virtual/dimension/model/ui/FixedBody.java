@@ -5,4 +5,5 @@ import com.ccbfm.virtual.dimension.model.OperateModel;
 public class FixedBody extends OperateModel {
 
 
+
 }

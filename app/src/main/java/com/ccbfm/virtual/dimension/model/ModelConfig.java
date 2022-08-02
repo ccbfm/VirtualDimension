@@ -1,6 +1,6 @@
 package com.ccbfm.virtual.dimension.model;
 
-public class ModelConfig {
+public final class ModelConfig {
 
     public interface UI {
         String ACTION_DESCRIPTION = "model_ui_action_description";
@@ -12,4 +12,10 @@ public class ModelConfig {
         String OPERATION = "model_ui_operation";
     }
 
+    public interface Cell {
+        //列
+        int COLUMN = 3;
+        //行
+        int ROW = 3;
+    }
 }
