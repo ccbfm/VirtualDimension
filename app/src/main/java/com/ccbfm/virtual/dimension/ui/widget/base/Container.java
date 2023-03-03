@@ -1,8 +1,7 @@
 package com.ccbfm.virtual.dimension.ui.widget.base;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -62,6 +61,10 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
 
     protected void initContainer(Context context) {
         LogUtils.d(TAG, "initContainer--=" + getSimpleName(), DEBUG);
+        setBackground();
+    }
+
+    protected void setBackground() {
 
     }
 
@@ -70,26 +73,6 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
             lifecycle.addObserver(this);
         }
         this.mLifecycle = lifecycle;
-    }
-
-    protected void setBorder() {
-        setBorder(ColorConfig.CString.C000000, ColorConfig.CString.CFFFFFF);
-    }
-
-    protected void setBorder(String borderColorString, String backgroundColorString) {
-        GradientDrawable drawable = new GradientDrawable();
-
-        if (!TextUtils.isEmpty(borderColorString)) {
-            // 设置圆角弧度
-            drawable.setCornerRadius(1);
-            // 设置边框线的粗细，颜色
-            drawable.setStroke(1, Color.parseColor(borderColorString));
-            setPadding(1, 1, 1, 1);
-        }
-        if (!TextUtils.isEmpty(backgroundColorString)) {
-            drawable.setColor(Color.parseColor(backgroundColorString));
-        }
-        setBackground(drawable);
     }
 
     protected void liveDataResult(T data) {

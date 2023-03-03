@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ccbfm.virtual.dimension.model.ModelConfig;
 import com.ccbfm.virtual.dimension.model.Operate;
 import com.ccbfm.virtual.dimension.model.ui.Operation;
+import com.ccbfm.virtual.dimension.ui.ColorConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
+import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Recycler;
 import com.ccbfm.virtual.dimension.ui.widget.base.Text;
 
@@ -31,8 +33,6 @@ public class OperationContainer extends Container<Operation> {
     @Override
     protected void initContainer(Context context) {
         super.initContainer(context);
-        setBorder();
-
         int padding = mWidthPixels >> 4;
         mOcAdapter = new OcAdapter(mWidthPixels, mHeightPixels, this);
         Recycler recycler = new Recycler(context);
@@ -42,6 +42,11 @@ public class OperationContainer extends Container<Operation> {
         recycler.setAdapter(mOcAdapter);
         LayoutParams recLp = new LayoutParams(mWidthPixels, mHeightPixels);
         addView(recycler, recLp);
+    }
+
+    @Override
+    protected void setBackground() {
+        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
     }
 
     @Override

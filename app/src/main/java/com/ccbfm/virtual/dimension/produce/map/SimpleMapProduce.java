@@ -12,6 +12,9 @@ public class SimpleMapProduce implements MapProduce<Scene[][]> {
 
     @Override
     public Scene[][] produce() {
+
+
+
         return new Scene[0][];
     }
 }

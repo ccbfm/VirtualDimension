@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import com.ccbfm.virtual.dimension.model.ModelConfig;
 import com.ccbfm.virtual.dimension.model.ui.Direction;
 import com.ccbfm.virtual.dimension.model.ui.Scene;
+import com.ccbfm.virtual.dimension.ui.ColorConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
+import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Text;
 import com.ccbfm.virtual.dimension.utils.LogUtils;
 
@@ -30,7 +32,6 @@ public class DirectionContainer extends Container<Direction> {
     @Override
     protected void initContainer(Context context) {
         super.initContainer(context);
-        setBorder();
 
         int cx = mWidthPixels >> 2;
         int cy = mHeightPixels >> 2;
@@ -61,6 +62,11 @@ public class DirectionContainer extends Container<Direction> {
         } catch (Throwable th) {
             LogUtils.e(TAG, "Throwable-=", th, DEBUG);
         }
+    }
+
+    @Override
+    protected void setBackground() {
+        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
     }
 
     @Override

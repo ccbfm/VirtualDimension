@@ -13,7 +13,9 @@ import com.ccbfm.virtual.dimension.model.ui.BodyDescription;
 import com.ccbfm.virtual.dimension.model.ui.FixedBody;
 import com.ccbfm.virtual.dimension.model.ui.MovingBody;
 import com.ccbfm.virtual.dimension.model.ui.Operation;
+import com.ccbfm.virtual.dimension.ui.ColorConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
+import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Recycler;
 import com.ccbfm.virtual.dimension.ui.widget.base.Text;
 import com.ccbfm.virtual.dimension.utils.livedata.LiveDataBus;
@@ -46,8 +48,11 @@ public class MovingBodyContainer extends Container<List<MovingBody>> {
         recycler.setAdapter(mMbAdapter);
         LayoutParams recLp = new LayoutParams(mWidthPixels, mHeightPixels);
         addView(recycler, recLp);
+    }
 
-        setBorder();
+    @Override
+    protected void setBackground() {
+        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
     }
 
     @Override

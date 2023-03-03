@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 
 import com.ccbfm.virtual.dimension.model.ModelConfig;
 import com.ccbfm.virtual.dimension.model.ui.Environment;
+import com.ccbfm.virtual.dimension.ui.ColorConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
+import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Scroll;
 import com.ccbfm.virtual.dimension.ui.widget.base.Text;
 
@@ -30,7 +32,6 @@ public class EnvironmentContainer extends Container<Environment> {
     @Override
     protected void initContainer(Context context) {
         super.initContainer(context);
-        setBorder();
 
         int hh = mHeightPixels >> 1;
         int fh = mHeightPixels >> 2;
@@ -69,6 +70,11 @@ public class EnvironmentContainer extends Container<Environment> {
         timeLp.topMargin = fh;
         addView(time, timeLp);
         mTime = time;
+    }
+
+    @Override
+    protected void setBackground() {
+        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
     }
 
     @Override

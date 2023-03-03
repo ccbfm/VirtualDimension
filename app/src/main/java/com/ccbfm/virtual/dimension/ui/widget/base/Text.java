@@ -1,9 +1,7 @@
 package com.ccbfm.virtual.dimension.ui.widget.base;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.util.TypedValue;
 
@@ -24,24 +22,6 @@ public class Text extends AppCompatTextView {
     }
 
     public Text setBorder() {
-        return setBorder(ColorConfig.CString.C000000, ColorConfig.CString.CFFFFFF);
-    }
-
-    public Text setBorder(String borderColorString, String backgroundColorString) {
-        GradientDrawable drawable = new GradientDrawable();
-
-        if (!TextUtils.isEmpty(borderColorString)) {
-            // 设置圆角弧度
-            drawable.setCornerRadius(1);
-            // 设置边框线的粗细，颜色
-            drawable.setStroke(1, Color.parseColor(borderColorString));
-            setPadding(1, 1, 1, 1);
-        }
-
-        if (!TextUtils.isEmpty(backgroundColorString)) {
-            drawable.setColor(Color.parseColor(backgroundColorString));
-        }
-        setBackground(drawable);
         return this;
     }
 
