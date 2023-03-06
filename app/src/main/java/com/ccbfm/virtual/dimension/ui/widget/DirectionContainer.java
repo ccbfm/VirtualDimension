@@ -10,6 +10,7 @@ import com.ccbfm.virtual.dimension.model.ModelConfig;
 import com.ccbfm.virtual.dimension.model.ui.Direction;
 import com.ccbfm.virtual.dimension.model.ui.Scene;
 import com.ccbfm.virtual.dimension.ui.ColorConfig;
+import com.ccbfm.virtual.dimension.ui.PxConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
 import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Text;
@@ -46,7 +47,7 @@ public class DirectionContainer extends Container<Direction> {
         try {
             for (int i = 0; i < cellY; i++) {
                 for (int j = 0; j < cellX; j++) {
-                    Text direction = new Text(context).setBorder();
+                    Text direction = new Text(context).border();
                     direction.setGravity(Gravity.CENTER);
                     direction.setText("");
                     LayoutParams directionLp = new LayoutParams(cx, cy);
@@ -66,7 +67,7 @@ public class DirectionContainer extends Container<Direction> {
 
     @Override
     protected void setBackground() {
-        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
+        setBackground(MixDrawable.build().setBorder(PxConfig.PxInt.CONTAINER_BORDER, ColorConfig.CInt.CFFC125));
     }
 
     @Override

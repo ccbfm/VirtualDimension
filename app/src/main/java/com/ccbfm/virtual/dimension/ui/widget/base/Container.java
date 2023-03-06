@@ -1,7 +1,6 @@
 package com.ccbfm.virtual.dimension.ui.widget.base;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -16,7 +15,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.OnLifecycleEvent;
 
-import com.ccbfm.virtual.dimension.ui.ColorConfig;
 import com.ccbfm.virtual.dimension.utils.LogUtils;
 import com.ccbfm.virtual.dimension.utils.livedata.LiveDataBus;
 
@@ -25,6 +23,7 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
     private static final boolean DEBUG = true;
     protected final Handler mMainHandler;
     protected int mWidthPixels, mHeightPixels;
+    protected int mPaddingLeft, mPaddingTop, mPaddingRight, mPaddingBottom;
     protected Lifecycle mLifecycle;
 
     public Container(@NonNull Context context) {
@@ -33,10 +32,12 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
 
     public Container(@NonNull Context context, int widthPixels, int heightPixels) {
         super(context);
-        this.mWidthPixels = widthPixels;
-        this.mHeightPixels = heightPixels;
-        mMainHandler = new Handler(Looper.getMainLooper());
+        setBackground();
+        this.mWidthPixels = widthPixels - mPaddingLeft - mPaddingRight;
+        this.mHeightPixels = heightPixels - mPaddingTop - mPaddingBottom;
+        this.mMainHandler = new Handler(Looper.getMainLooper());
 
+        setPadding(this.mPaddingLeft, this.mPaddingTop, this.mPaddingRight, this.mPaddingBottom);
         initContainer(context);
 
         if (context instanceof LifecycleOwner) {
@@ -61,7 +62,7 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
 
     protected void initContainer(Context context) {
         LogUtils.d(TAG, "initContainer--=" + getSimpleName(), DEBUG);
-        setBackground();
+
     }
 
     protected void setBackground() {
@@ -121,4 +122,5 @@ public class Container<T> extends FrameLayout implements LifecycleObserver, View
         }
 
     }
+
 }

@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.ccbfm.virtual.dimension.ui.widget.draw.BackgroundDraw;
 import com.ccbfm.virtual.dimension.ui.widget.draw.BorderDraw;
 import com.ccbfm.virtual.dimension.ui.widget.draw.IDraw;
 
@@ -21,14 +22,25 @@ public class MixDrawable extends Drawable {
 
     private final LinkedList<IDraw> mDraws = new LinkedList<>();
 
-    public MixDrawable setBorder(int border, int borderColor) {
-        BorderDraw borderDraw = new BorderDraw(this);
+    public MixDrawable setBorder(int border, int color) {
+        BorderDraw draw = new BorderDraw(this);
         // 设置圆角弧度
-        borderDraw.setCornerRadius(1);
+        draw.setCornerRadius(1);
         // 设置边框线的粗细，颜色
-        borderDraw.setStroke(1, borderColor);
-        borderDraw.setBorder(border);
-        this.mDraws.add(borderDraw);
+        draw.setStroke(1, color);
+        draw.setBorder(border);
+        this.mDraws.add(draw);
+        return this;
+    }
+
+    public MixDrawable setBackground(int border, int color){
+        BackgroundDraw draw = new BackgroundDraw(this);
+        // 设置圆角弧度
+        draw.setCornerRadius(1);
+        // 设置边框线的粗细，颜色
+        draw.setColor(color);
+        //borderDraw.setBorder(border);
+        this.mDraws.add(draw);
         return this;
     }
 

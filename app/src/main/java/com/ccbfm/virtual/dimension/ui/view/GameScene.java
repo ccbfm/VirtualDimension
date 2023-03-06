@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 
+import com.ccbfm.virtual.dimension.model.ModelConfig;
+import com.ccbfm.virtual.dimension.model.ui.Environment;
 import com.ccbfm.virtual.dimension.ui.widget.ActionDescriptionContainer;
 import com.ccbfm.virtual.dimension.ui.widget.BodyDescriptionContainer;
 import com.ccbfm.virtual.dimension.ui.widget.DirectionContainer;
@@ -12,12 +14,17 @@ import com.ccbfm.virtual.dimension.ui.widget.FixedBodyContainer;
 import com.ccbfm.virtual.dimension.ui.widget.MovingBodyContainer;
 import com.ccbfm.virtual.dimension.ui.widget.OperationContainer;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
+import com.ccbfm.virtual.dimension.utils.PxUtils;
+import com.ccbfm.virtual.dimension.utils.livedata.LiveDataBus;
 
 public class GameScene extends BaseScene {
 
     @Override
     protected void initData() {
-
+        Environment environment = new Environment();
+        environment.setName("xx");
+        environment.setDescription("xxx\nxxx\nxxx\nxxx\nxxx\nxxx\nxxx\nxxx\nxxx");
+        LiveDataBus.get().<Environment>with(ModelConfig.UI.ENVIRONMENT).postValue(environment);
     }
 
     @Override
@@ -25,10 +32,15 @@ public class GameScene extends BaseScene {
         int wp = mWidthPixels;
         int hp = mHeightPixels;
 
-        int wp_2 = mWidthPixels >> 1;
-        int wp_4 = mWidthPixels >> 2;
-        int hp_3 = mHeightPixels / 3;
-        int hp_6 = hp_3 >> 1;
+        float fwp_2 = PxUtils.division(wp, 2);
+        float fwp_4 = PxUtils.division(wp, 4);
+        float fhp_3 = PxUtils.division(hp, 3);
+        int wp_2 = PxUtils.round(fwp_2);
+        int wp_4 = PxUtils.round(fwp_4);
+        int hp_3 =  PxUtils.round(fhp_3);
+
+        float fhp_6 = PxUtils.division(fhp_3, 2);
+        int hp_6 = PxUtils.round(fhp_6);
 
         Container<?> container = new Container<>(context);
         container.setLifecycle(getLifecycle());
@@ -42,7 +54,7 @@ public class GameScene extends BaseScene {
         bodyLp.topMargin = hp_6;
         container.addView(bodyDescription, bodyLp);
 
-        int fbHp = hp - hp_3;
+        int fbHp = PxUtils.round(hp - fhp_3);
         FixedBodyContainer fixedBody = new FixedBodyContainer(context, wp_4, fbHp);
         Container.LayoutParams fixedLp = new Container.LayoutParams(wp_4, fbHp);
         fixedLp.topMargin = hp_3;
@@ -61,12 +73,12 @@ public class GameScene extends BaseScene {
 
         DirectionContainer direction = new DirectionContainer(context, wp_2, hp_3);
         Container.LayoutParams dirLp = new Container.LayoutParams(wp_2, hp_3, Gravity.END);
-        dirLp.topMargin = hp - hp_3;
+        dirLp.topMargin = fbHp;
         container.addView(direction, dirLp);
 
         OperationContainer operation = new OperationContainer(context, wp_4, hp_3);
         Container.LayoutParams opeLp = new Container.LayoutParams(wp_4, hp_3);
-        opeLp.topMargin = hp - hp_3;
+        opeLp.topMargin = fbHp;
         opeLp.leftMargin = wp_4;
         container.addView(operation, opeLp);
 

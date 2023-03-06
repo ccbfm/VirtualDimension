@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ccbfm.virtual.dimension.model.ModelConfig;
 import com.ccbfm.virtual.dimension.model.ui.BodyDescription;
-import com.ccbfm.virtual.dimension.model.ui.FixedBody;
 import com.ccbfm.virtual.dimension.model.ui.MovingBody;
 import com.ccbfm.virtual.dimension.model.ui.Operation;
 import com.ccbfm.virtual.dimension.ui.ColorConfig;
+import com.ccbfm.virtual.dimension.ui.PxConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
 import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Recycler;
@@ -52,7 +52,7 @@ public class MovingBodyContainer extends Container<List<MovingBody>> {
 
     @Override
     protected void setBackground() {
-        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
+        setBackground(MixDrawable.build().setBorder(PxConfig.PxInt.CONTAINER_BORDER, ColorConfig.CInt.C00E5EE));
     }
 
     @Override
@@ -111,7 +111,7 @@ public class MovingBodyContainer extends Container<List<MovingBody>> {
             Container<?> container = new Container<>(context);
             container.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, mItemHP));
 
-            Text text = new Text(context).setClickListener(mClickListener).singleLine().setBorder();
+            Text text = new Text(context).setClickListener(mClickListener).singleLine().border();
 
             text.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,

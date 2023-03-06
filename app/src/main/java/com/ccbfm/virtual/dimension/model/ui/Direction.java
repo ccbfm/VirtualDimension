@@ -14,7 +14,7 @@ public class Direction {
         this.scenes = scenes;
     }
 
-    public void setScenes(int row, int column, Scene scene) {
+    public void setScene(int row, int column, Scene scene) {
         if (this.scenes == null) {
             this.scenes = new Scene[ModelConfig.Cell.ROW][ModelConfig.Cell.COLUMN];
         }

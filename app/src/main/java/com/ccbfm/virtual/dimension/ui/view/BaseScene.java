@@ -19,8 +19,8 @@ public abstract class BaseScene extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         LogUtils.w(TAG, "onCreate--=" + this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        mWidthPixels = getResources().getDisplayMetrics().widthPixels;
-        mHeightPixels = getResources().getDisplayMetrics().heightPixels;
+        this.mWidthPixels = getResources().getDisplayMetrics().widthPixels;
+        this.mHeightPixels = getResources().getDisplayMetrics().heightPixels;
         initData();
         setContentView(initScene(this));
     }

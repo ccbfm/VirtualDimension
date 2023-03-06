@@ -27,4 +27,8 @@ public final class LiveDataBus extends HashMapMode<String, MutableLiveData<?>> {
         return new MutableLiveData<>();
     }
 
+    public static <T> void changeData(String key, T data) {
+        LiveDataBus.get().<T>with(key)
+                .postValue(data);
+    }
 }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import com.ccbfm.virtual.dimension.model.ModelConfig;
 import com.ccbfm.virtual.dimension.model.ui.ActionDescription;
 import com.ccbfm.virtual.dimension.ui.ColorConfig;
+import com.ccbfm.virtual.dimension.ui.PxConfig;
 import com.ccbfm.virtual.dimension.ui.widget.base.Container;
 import com.ccbfm.virtual.dimension.ui.widget.base.MixDrawable;
 import com.ccbfm.virtual.dimension.ui.widget.base.Scroll;
@@ -50,7 +51,7 @@ public class ActionDescriptionContainer extends Container<ActionDescription> {
 
     @Override
     protected void setBackground() {
-        setBackground(MixDrawable.build().setBorder(2, ColorConfig.CInt.C000000));
+        setBackground(MixDrawable.build().setBorder(PxConfig.PxInt.CONTAINER_BORDER, ColorConfig.CInt.C8B0A50));
     }
 
     @Override

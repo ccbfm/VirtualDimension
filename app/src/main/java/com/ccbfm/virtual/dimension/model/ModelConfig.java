@@ -18,4 +18,8 @@ public final class ModelConfig {
         //行
         int ROW = 3;
     }
+
+    public interface SpaceName {
+        String MAIN = "main";
+    }
 }
